@@ -1,15 +1,12 @@
 import React from 'react'
-// import { Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
-// import Title from ''
+import Index from './home/Home'
 
 const App: React.FunctionComponent = () => {
     return (
         <>
-            <div>
-                <h1>GOOD MORNING React</h1>
-            </div>     
-            {/* <Route exact path='/' component={Title} /> */}
+            <Route exact path='/' component={Index} />
         </>
     )
 }
