@@ -93,5 +93,6 @@
   "repository": {
     "type": "git",
     "url": "frontend"
-  }
+  },
+  "proxy": "http://127.0.0.1:5000"
 }
