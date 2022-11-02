@@ -52,7 +52,7 @@ const Home: React.FunctionComponent = () => {
                 {status === 'success' && (
                     <div>
                         {data.map((res: string, key: number) => (
-                            console.log(res),
+                            console.log(`All rows result: ${res}`),
                             // console.log(`In map: ${res.id} ${res.created}`),
                             // <p key={res.id}>{res.id} {res.created} {res.name} {res.count}</p>
                             <p key={key}>{res}</p>
