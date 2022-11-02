@@ -2,30 +2,38 @@ import React from 'react'
 import axios from "axios"
 import { useQuery } from "react-query"
 
-interface FetchData {
-    id: string
-    created: Date
-    name: string
-    count: number
-}
+// interface FetchData {
+//     id: string
+//     created: Date
+//     name: string
+//     count: number
+// }
 
 // interface FetchAllData {
 //     fetchAllData: FetchData
 // }
 
-const fetchData = async () => {
+const fetchAllData = async () => {
     const res = await axios.get(`http://127.0.0.1:5000/test/test-get-all`)
-    console.log(`In fetchData: ${res.data} ${res.status}`)
-    console.log(typeof(res.data))
+    console.log(`In fetchAllData: ${res.data} ${res.status}`)
     return res.data
-} 
+}
+
+const fetchData = async (resultToGet: number) => {
+    const res = await axios.get(`http://127.0.0.1:5000/test/test-get-one/${resultToGet}`)
+    console.log(`In fetchData: ${res.data} ${res.status}`)
+    return res.data
+}
 
 const Home: React.FunctionComponent = () => {
-    const { data, status } = useQuery('test', fetchData)
+    const { data, status } = useQuery('test', fetchAllData)
     console.log(`1 ${data} ${status}`)
 
     // const [data, useData] = useState<FetchAllData>()
     // console.log(`2 ${data}`)
+    const resultToGet = 1
+    const response = useQuery(['test2', resultToGet], () => fetchData(resultToGet))
+    console.log(`2 ${response.data} ${response.status}`)
 
     return (
         <>
@@ -34,19 +42,31 @@ const Home: React.FunctionComponent = () => {
                 <p>this is the main page currently</p>
             </div>
             <div>
-                {status === 'error' && <p>Error attempting to fetch data</p>}
+                <h5>Checking get all rows</h5>
+                {status === 'error' && <p>Error attempting to fetch ALL data</p>}
                 {status === 'loading' && <p>Loading...</p>}
-                {status === 'success' && data && (
+                {status === 'success' && (
                     <div>
-                        {data.map((res: string) => (
+                        {data.map((res: string, key: number) => (
                             console.log(res),
                             // console.log(`In map: ${res.id} ${res.created}`),
                             // <p key={res.id}>{res.id} {res.created} {res.name} {res.count}</p>
-                            <p key={res}>{res}</p>
+                            <p key={key}>{res}</p>
                         ))}
                     </div>
                 )}
-            </div>  
+            </div>
+            <hr />
+            <h5>Checking get one row</h5>
+            <div>
+                {status === 'error' && <p>Error attempting to fetch data for ONE</p>}
+                {status === 'loading' && <p>Loading...</p>}
+                {status === 'success' && (
+                    <div>
+                        <p>{response.data}</p>
+                    </div>
+                )}
+            </div>
         </>
     )
 }
