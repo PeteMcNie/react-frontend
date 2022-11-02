@@ -47,7 +47,7 @@ const Home: React.FunctionComponent = () => {
             </div>
             <div>
                 <h5>Checking get all rows</h5>
-                {status === 'error' && <p>Error attempting to fetch ALL data</p>}
+                {status === 'error' && <p>Error attempting to fetch ALL data. Do you have a terminal started on localhost:5000?</p>}
                 {status === 'loading' && <p>Loading...</p>}
                 {status === 'success' && (
                     <div>
@@ -63,7 +63,7 @@ const Home: React.FunctionComponent = () => {
             <hr />
             <h5>Checking get one row</h5>
             <div>
-                {status === 'error' && <p>Error attempting to fetch data for ONE</p>}
+                {status === 'error' && <p>Error attempting to fetch data for ONE. Do you have a terminal started on localhost:5000?</p>}
                 {status === 'loading' && <p>Loading...</p>}
                 {status === 'success' && (
                     <div>
