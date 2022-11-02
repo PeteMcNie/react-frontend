@@ -21,6 +21,7 @@ A bolier plate to get started on typescript-react projects quicker.
 - `npm init`
 - `npm install`
 - `npm start`
+
 *See package.json for more commands*
 
 ## Frontend localhost
@@ -30,4 +31,6 @@ A bolier plate to get started on typescript-react projects quicker.
 
 ## Backend localhost
 
-This project has one component called home which displays all the data for the page. There are two axios querys to a backend at `http://localhost:5000` which will return data from the server based on port 5000. This is where the flask app api data from the project called 'backend' will be sent to. Unless you follow the instructions and start a terminal on port 5000 as per the 'backend' instructions this app will not return results from the database.
+- This project has one component called home which displays all the data for the page.
+- There are two axios querys to a backend at `http://localhost:5000` which will return data from the server based on port 5000. This is where the flask app api data from the project called 'backend' will be sent to.
+- Unless you follow the instructions and start a terminal on port 5000 as per the 'backend' instructions this app will not return results from the database. This doesn't mean the frontend is not working, just the connection to get data from the backend.
