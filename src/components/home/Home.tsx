@@ -2,6 +2,10 @@ import React from 'react'
 import axios from "axios"
 import { useQuery } from "react-query"
 
+const axios_ = axios.create({
+  baseURL: 'http://localhost:5000',
+  headers: { 'Content-Type': 'application/json' }
+})
 // interface FetchData {
 //     id: string
 //     created: Date
@@ -14,13 +18,13 @@ import { useQuery } from "react-query"
 // }
 
 const fetchAllData = async () => {
-    const res = await axios.get(`http://127.0.0.1:5000/test/test-get-all`)
+    const res = await axios_.get(`/test/test-get-all`)
     console.log(`In fetchAllData: ${res.data} ${res.status}`)
     return res.data
 }
 
 const fetchData = async (resultToGet: number) => {
-    const res = await axios.get(`http://127.0.0.1:5000/test/test-get-one/${resultToGet}`)
+    const res = await axios_.get(`/test/test-get-one/${resultToGet}`)
     console.log(`In fetchData: ${res.data} ${res.status}`)
     return res.data
 }
@@ -31,7 +35,7 @@ const Home: React.FunctionComponent = () => {
 
     // const [data, useData] = useState<FetchAllData>()
     // console.log(`2 ${data}`)
-    const resultToGet = 1
+    const resultToGet = 2
     const response = useQuery(['test2', resultToGet], () => fetchData(resultToGet))
     console.log(`2 ${response.data} ${response.status}`)
 
