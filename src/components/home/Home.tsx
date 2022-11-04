@@ -6,6 +6,7 @@ const axios_ = axios.create({
   baseURL: 'http://localhost:5000',
   headers: { 'Content-Type': 'application/json' }
 })
+
 // interface FetchData {
 //     id: string
 //     created: Date
@@ -70,6 +71,10 @@ const Home: React.FunctionComponent = () => {
                         <p>{response.data}</p>
                     </div>
                 )}
+            </div>
+            <div>
+                <p>Testing image loading via scss</p>
+                <div className="test-image"></div>
             </div>
         </>
     )

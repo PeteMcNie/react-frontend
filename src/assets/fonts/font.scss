@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'PT Serif, serif'; /* Link to font family chosen https://fonts.google.com/specimen/PT+Serif?query=serif */
+    src: url('./PTSerif-Regular.ttf');
+    src: url('./PTSerif-BoldItalic.ttf') format('truetype'),
+         url('./PTSerif-Italic.ttf') format('truetype'),
+         url('./PTSerif-Bold.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
