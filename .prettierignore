@@ -1,7 +1,7 @@
+webpack*
 node_modules
 bundle*
 dist*
 build*
 .DS_Store
-.eslint*
-.prettierrc.json
+README.md

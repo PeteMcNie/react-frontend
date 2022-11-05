@@ -2,7 +2,7 @@
 
 A bolier plate to get started on typescript-react projects quicker.
 
-*************************
+*******************************
 
 ## To copy this frontend boilerplate
 
@@ -14,7 +14,7 @@ A bolier plate to get started on typescript-react projects quicker.
 - `git remote add origin <url from github>`
 - `git push -u origin main` to add project to github
 
-*************************
+*******************************
 
 ## To run the project
 
@@ -22,12 +22,11 @@ A bolier plate to get started on typescript-react projects quicker.
 - `npm install`
 - `npm start`
 
-*See package.json for more commands*
+_See package.json for more commands_
 
 ## Frontend localhost
+
 - Frontend localhost is setup for this project on localhost:8080
-
-
 
 ## Backend localhost
 
