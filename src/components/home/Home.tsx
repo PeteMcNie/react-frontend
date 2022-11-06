@@ -2,21 +2,17 @@ import React from "react"
 import axios from "axios"
 import { useQuery } from "react-query"
 
+interface TestTable {
+  id: string
+  created: string
+  name: string
+  count: number
+}
+
 const axios_ = axios.create({
   baseURL: "http://localhost:5000",
   headers: { "Content-Type": "application/json" },
 })
-
-// interface FetchData {
-//     id: string
-//     created: Date
-//     name: string
-//     count: number
-// }
-
-// interface FetchAllData {
-//     fetchAllData: FetchData
-// }
 
 const fetchAllData = async () => {
   const res = await axios_.get(`/test/test-get-all`)
@@ -31,13 +27,11 @@ const fetchData = async (resultToGet: number) => {
 }
 
 const Home: React.FunctionComponent = () => {
-  const { data, status } = useQuery("test", fetchAllData)
+  const { data, status } = useQuery(["test_table"], fetchAllData)
   console.log(`1 ${data} ${status}`)
 
-  // const [data, useData] = useState<FetchAllData>()
-  // console.log(`2 ${data}`)
   const resultToGet = 2
-  const response = useQuery(["test2", resultToGet], () =>
+  const response = useQuery(["test_table", 1, resultToGet], () =>
     fetchData(resultToGet)
   )
   console.log(`2 ${response.data} ${response.status}`)
@@ -60,12 +54,11 @@ const Home: React.FunctionComponent = () => {
         {status === "success" && (
           <div>
             {data.map(
-              (res: string, key: number) => (
+              (res: TestTable) => (
                 console.log(`All rows result: ${res}`),
                 (
                   // console.log(`In map: ${res.id} ${res.created}`),
-                  // <p key={res.id}>{res.id} {res.created} {res.name} {res.count}</p>
-                  <p key={key}>{res}</p>
+                  <p key={res.id}>{res.id} {res.created} {res.name} {res.count}</p>
                 )
               )
             )}
@@ -77,7 +70,7 @@ const Home: React.FunctionComponent = () => {
       <div>
         {status === "error" && (
           <p>
-            Error attempting to fetch data for ONE. Do you have a terminal
+            {response.data.message} Error attempting to fetch data for ONE. Do you have a terminal
             started on localhost:5000?
           </p>
         )}
