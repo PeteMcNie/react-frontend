@@ -16,25 +16,23 @@ const axios_ = axios.create({
 
 const fetchAllData = async () => {
   const res = await axios_.get(`/test/test-get-all`)
-  console.log(`In fetchAllData: ${res.data} ${res.status}`)
   return res.data
 }
 
 const fetchData = async (resultToGet: number) => {
   const res = await axios_.get(`/test/test-get-one/${resultToGet}`)
-  console.log(`In fetchData: ${res.data} ${res.status}`)
   return res.data
 }
 
 const Home: React.FunctionComponent = () => {
   const { data, status } = useQuery(["test_table"], fetchAllData)
-  console.log(`1 ${data} ${status}`)
+  console.log(`1 ${data} ${typeof data} ${status}`)
 
-  const resultToGet = 2
+  const resultToGet = 1
   const response = useQuery(["test_table", 1, resultToGet], () =>
     fetchData(resultToGet)
   )
-  console.log(`2 ${response.data} ${response.status}`)
+  console.log(`2 ${response.data} ${typeof response.data} ${response.status}`)
 
   return (
     <>
@@ -53,15 +51,11 @@ const Home: React.FunctionComponent = () => {
         {status === "loading" && <p>Loading...</p>}
         {status === "success" && (
           <div>
-            {data.map(
-              (res: TestTable) => (
-                console.log(`All rows result: ${res}`),
-                (
-                  // console.log(`In map: ${res.id} ${res.created}`),
-                  <p key={res.id}>{res.id} {res.created} {res.name} {res.count}</p>
-                )
-              )
-            )}
+            {data.map((res: TestTable) => (
+              <p key={res.id}>
+                {res.id} {res.created} {res.name} {res.count}
+              </p>
+            ))}
           </div>
         )}
       </div>
@@ -70,16 +64,21 @@ const Home: React.FunctionComponent = () => {
       <div>
         {status === "error" && (
           <p>
-            {response.data.message} Error attempting to fetch data for ONE. Do you have a terminal
+            {response.data.message}
+            Error attempting to fetch data for ONE. Do you have a terminal
             started on localhost:5000?
           </p>
         )}
         {status === "loading" && <p>Loading...</p>}
-        {status === "success" && (
+        {status === "success" && response.data && (
           <div>
-            <p>{response.data}</p>
+            <p>
+              {response.data.id} {response.data.created} {response.data.name}{" "}
+              {response.data.count}
+            </p>
           </div>
         )}
+        {response.data?.message ? <p>{response.data?.message}</p> : null}
       </div>
       <div>
         <p>Testing image loading via scss</p>
