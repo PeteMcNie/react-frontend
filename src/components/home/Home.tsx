@@ -15,12 +15,12 @@ const axios_ = axios.create({
 })
 
 const fetchAllData = async () => {
-  const res = await axios_.get(`/test/test-get-all`)
+  const res = await axios_.get(`/example/example-get-all`)
   return res.data
 }
 
 const fetchData = async (resultToGet: number) => {
-  const res = await axios_.get(`/test/test-get-one/${resultToGet}`)
+  const res = await axios_.get(`/example/example-get-one/${resultToGet}`)
   return res.data
 }
 
