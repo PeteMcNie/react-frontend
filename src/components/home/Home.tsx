@@ -2,7 +2,7 @@ import React from "react"
 import axios from "axios"
 import { useQuery } from "react-query"
 
-interface TestTable {
+interface ExampleTableData {
   id: string
   created: string
   name: string
@@ -19,18 +19,17 @@ const fetchAllData = async () => {
   return res.data
 }
 
-const fetchData = async (resultToGet: number) => {
-  const res = await axios_.get(`/example/example-get-one/${resultToGet}`)
+const fetchData = async (count: number) => {
+  const res = await axios_.get(`/example/example-get-one/${count}`)
   return res.data
 }
 
 const Home: React.FunctionComponent = () => {
-  const { data, status } = useQuery(["test_table"], fetchAllData)
-  console.log(`1 ${data} ${typeof data} ${status}`)
+  const { data, status } = useQuery(["example_table"], fetchAllData)
 
-  const resultToGet = 1
-  const response = useQuery(["test_table", 1, resultToGet], () =>
-    fetchData(resultToGet)
+  const count = 2
+  const response = useQuery(["example_table", 1, count], () =>
+    fetchData(count)
   )
   console.log(`2 ${response.data} ${typeof response.data} ${response.status}`)
 
@@ -51,7 +50,7 @@ const Home: React.FunctionComponent = () => {
         {status === "loading" && <p>Loading...</p>}
         {status === "success" && (
           <div>
-            {data.map((res: TestTable) => (
+            {data.results.map((res: ExampleTableData) => (
               <p key={res.id}>
                 {res.id} {res.created} {res.name} {res.count}
               </p>
@@ -62,15 +61,14 @@ const Home: React.FunctionComponent = () => {
       <hr />
       <h5>Checking get one row</h5>
       <div>
-        {status === "error" && (
+        {response.status === "error" && (
           <p>
-            {response.data.message}
             Error attempting to fetch data for ONE. Do you have a terminal
             started on localhost:5000?
           </p>
         )}
-        {status === "loading" && <p>Loading...</p>}
-        {status === "success" && response.data && (
+        {response.status === "loading" && <p>Loading...</p>}
+        {response.status === "success" && response.data && (
           <div>
             <p>
               {response.data.id} {response.data.created} {response.data.name}{" "}
